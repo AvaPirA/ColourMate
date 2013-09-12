@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThemeActivity" >
+
+    <TextView
+        android:id="@+id/text_theme_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/image_theme_swatches"
+        android:layout_centerHorizontal="true"
+        android:text="@string/by_author"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/image_theme_swatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_launcher" 
+        android:contentDescription="@string/contant_image_swatches"/>
+
+    <TextView
+        android:id="@+id/text_theme_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_theme_author"
+        android:layout_centerHorizontal="true"
+        android:text="@string/activity_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_theme_comments"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/get_comments" />
+
+    <RatingBar
+		android:id="@+id/image_theme_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_theme_comments"
+        android:layout_centerHorizontal="true" android:contentDescription="@string/content_image_rating"/>
+
+</RelativeLayout>

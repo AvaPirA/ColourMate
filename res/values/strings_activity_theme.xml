@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_name">ThemeName</string>
+    <string name="get_comments">Get comments</string>
+    <string name="by_author">by author</string>
+    <string name="search">search</string>
+    <string name="rating_pic">rating_pic</string>
+</resources>

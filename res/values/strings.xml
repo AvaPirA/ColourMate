@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   
+     <string name="app_name">ColourMate</string>
+   
+    <!--  -->
+    <string name="title_settings_activity">Dummy Settings Activity</string>
+    <string name="title_theme_activity">Kuler theme</string>
+    <string name="search_field_hint">Type search query here</string>
+    <string name="author">Alpen Ditrix</string>
+    <string name="network_error">Network error. Check your Internet connection</string>
+    <string name="contant_image_swatches">Swatches</string>
+    <string name="content_image_rating">Rating of this theme</string>
+
+    <!-- Option menu buttons -->
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+
+    <!-- Dates -->
+
+    <string name="jan">January</string>
+    <string name="feb">February</string>
+    <string name="mar">March</string>
+    <string name="apr">April</string>
+    <string name="may">May</string>
+    <string name="jun">June</string>
+    <string name="jul">July</string>
+    <string name="aug">August</string>
+    <string name="sep">September</string>
+    <string name="oct">October</string>
+    <string name="nov">November</string>
+    <string name="dec">December</string>
+    <!--  -->
+
+    <string name="helloprealpha">Hello! Here you can see PreprepreprepreAlpha version of my humble application. I made it using Kuler API to help you search some cool color stacks. This application will be able to make search request, to look at "default" feed, to explore single color theme and to read its comments, to show color themes of some specified author and something yet. \nNow app only can download list of feed or search request and to show it as list. Oh, and show one theme in separate window, of course. For me, as for developer, it\'s very-very cool (because I\'m very-very lazy). See you soon!</string>
+    <string name="list_is_emtpy">List is emtpy</string>
+    <string name="activity_title_theme">ThemeActivity</string>
+    <string name="by_">"by "</string>
+    <string name="last_edited_at_">&quot;Last edit: &quot;</string>
+    <string name="help">Help</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="history">History</string>
+    <string name="networking_error_time_expired">Loading time expired. Try again</string>
+    <string name="menu_add_to_favourites">Add to Favourites</string>
+    <string name="title_activity_favourites">Favourites</string>
+
+</resources>

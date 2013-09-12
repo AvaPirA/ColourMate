@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <Preference
+        android:title="@string/title_version"
+        android:summary="@string/summary_version"
+        />
+    <Preference
+        android:title="@string/title_author"
+        android:summary="@string/summary_author"
+        />
+    <Preference 
+        android:icon="@drawable/ic_kuler"
+        android:title="@string/cookies_by"
+        
+        />
+    
+
+</PreferenceScreen>

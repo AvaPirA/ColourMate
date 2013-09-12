@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="autoupload"
+        android:summaryOff="@string/pref_summary_autoupload_OFF"
+        android:summaryOn="@string/pref_summary_autoupload_ON"
+        android:title="@string/pref_title_autoupload" />
+
+    <ListPreference
+        android:defaultValue="-1"
+        android:entries="@array/pref_tpp_values"
+        android:entryValues="@array/pref_tpp_values"
+        android:key="themes_per_page"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:summary="@string/pref_summary_themes_per_page"
+        android:title="@string/pref_title_themes_per_page" />
+    
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="use_history"
+        android:summaryOff="Do not save requests"
+        android:summaryOn="Save few last requests"
+        android:title="@string/pref_title_autoupload" />
+
+    <ListPreference 
+        android:defaultValue="1"
+        android:dependency="use_history"
+        android:entries="@array/pref_history_size"
+        android:entryValues="@array/pref_history_size"
+        android:key="history_size"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:summary="@string/pref_summary_history_size"
+        android:title="@string/pref_title_history_size"
+        
+        />
+
+</PreferenceScreen>

@@ -1,0 +1,14 @@
+
+<resources>
+    <string-array name="list_vew_default">
+        <item >a</item>
+        <item >b</item>
+        <item >c</item>
+        <item >d</item>
+        <item >e</item>
+        <item >f</item>
+        <item >g</item>
+        <item >h</item>
+    </string-array>
+    
+</resources>

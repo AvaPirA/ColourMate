@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.avapir.colourmate"
+    android:installLocation="auto"
+    android:versionCode="08052013"
+    android:versionName="@string/summary_version" >
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:allowClearUserData="false"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.avapir.colourmate.activities.SettingsActivity"
+            android:label="@string/title_settings_activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="false" />
+        </activity>
+        <activity
+            android:name="com.avapir.colourmate.activities.ThemeActivity"
+            android:label="@string/title_theme_activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="false" />
+        </activity>
+        <activity
+            android:name="com.avapir.colourmate.activities.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.avapir.colourmate.activities.HistoryActivity"
+            android:label="@string/title_activity_history" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.avapir.colourmate.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.avapir.colourmate.Favourites"
+            android:label="@string/title_activity_favourites" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.avapir.colourmate.activities.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>

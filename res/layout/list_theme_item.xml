@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/text_theme_list_title"
+        style="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Title"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/image_theme_list_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/text_theme_list_title"
+        android:contentDescription="@string/rating_pic" />
+
+    <TextView
+        android:id="@+id/text_theme_list_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/text_theme_list_title"
+        android:text="Author" />
+
+    <ImageView
+        android:id="@+id/image_theme_list_swatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/image_theme_list_swatches"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/contant_image_swatches" />
+
+    <TextView
+        android:id="@+id/text_theme_list_edited_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_theme_list_title"
+        android:layout_below="@id/text_theme_list_title"
+        android:layout_margin="5dp"
+        android:text="01/01/1970" />
+
+</RelativeLayout>
