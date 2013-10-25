@@ -5,7 +5,7 @@ package com.avapir.colourmate.networking.util;
  * This class describes basic methods for classes which will create URLs for different cases
  * 
  * @author Alpen Ditrix
- *
+ * 
  */
 public abstract class RequestCostructor {
 
@@ -14,12 +14,12 @@ public abstract class RequestCostructor {
 	 * used without it now (Jan 2013)
 	 * 
 	 */
-	protected static final String API_KEY = "&key=D73836C0141F58B9BD423CD965F795AF";
+	protected static final String	API_KEY		= "&key=D73836C0141F58B9BD423CD965F795AF";
 
 	/**
 	 * Default prefix of request to Adobe.kuler API
 	 */
-	protected static final String DFT_LINK = "https://kuler-api.adobe.com/rss/";
+	protected static final String	DFT_LINK	= "https://kuler-api.adobe.com/rss/";
 
 	/**
 	 * Every request may have few modes: load most popular themes, last added,
@@ -50,8 +50,8 @@ public abstract class RequestCostructor {
 	 *            user's request string
 	 * @return URL-string ready for usage
 	 */
-	protected String makeRequest(String textRequest) {
-		StringBuilder request = new StringBuilder(DFT_LINK);
+	protected String makeRequest(final String textRequest) {
+		final StringBuilder request = new StringBuilder(DFT_LINK);
 		request.append(chooseMode(textRequest.length()));
 		request.append(makeCorrect(textRequest));
 		request.append(otherProperties());

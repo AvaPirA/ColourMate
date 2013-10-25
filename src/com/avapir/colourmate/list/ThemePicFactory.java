@@ -25,24 +25,24 @@ public class ThemePicFactory {
 	/**
 	 * Relative height of creating picture
 	 */
-	static final int height = 40;
+	static final int			height				= 20;
 	/**
 	 * Relative width for one one-color rectangle
 	 */
-	static final int widthSwatch = height * 2;
+	static final int			widthSwatch			= height * 2;
 	/**
 	 * Relative width of whole picture
 	 */
-	static int width = widthSwatch * 5;
+	static int					width				= widthSwatch * 5;
 	/**
 	 * Property if borders of picture will be made darker
 	 */
-	static boolean usePowerOfDarkness = true;
+	static boolean				usePowerOfDarkness	= true;
 
 	/**
 	 * Factor value for making color darker from java.awt.Color
 	 */
-	private static final double FACTOR = 0.7;
+	private static final double	FACTOR				= 0.7;
 
 	/**
 	 * Makes borders of output picture darker. {@code height*width} must be
@@ -69,9 +69,13 @@ public class ThemePicFactory {
 	 *            each element is how much pixel of this level will be made
 	 *            darker
 	 */
-	private static void blur(final int[] pixels, final int height,
-			final int width, final int[] borders, final int[] counts) {
-		final long start = System.nanoTime();
+	private static void blur(final int[] pixels, final int height, final int width,
+			final int[] borders, final int[] counts) {
+		if (pixels.length != height * width) {
+			throw new IllegalArgumentException("Wrong pic dimensions");
+		}
+
+		final long start = System.currentTimeMillis();
 		int levelsAmout = 0;
 		if (borders.length == counts.length) {
 			levelsAmout = borders.length;
@@ -86,8 +90,7 @@ public class ThemePicFactory {
 			borderToThere += borders[I];
 
 			// TOP
-			for (int x = borderToHere, y = borderToHere; x < width
-					- borderToHere
+			for (int x = borderToHere, y = borderToHere; x < width - borderToHere
 					&& y < borderToThere; x++) {
 				final int pos = y * width + x;
 				for (int i = 0; i < c; i++) {
@@ -99,8 +102,7 @@ public class ThemePicFactory {
 				}
 			}
 			// DOWN
-			for (int x = borderToHere, y = height - borderToThere; x < width
-					- borderToHere
+			for (int x = borderToHere, y = height - borderToThere; x < width - borderToHere
 					&& y < height - borderToHere; x++) {
 				final int pos = y * width + x;
 				for (int i = 0; i < c; i++) {
@@ -112,8 +114,7 @@ public class ThemePicFactory {
 				}
 			}
 			// RIGHT
-			for (int x = width - borderToThere, y = borderToThere; x < width
-					- borderToHere
+			for (int x = width - borderToThere, y = borderToThere; x < width - borderToHere
 					&& y < height - borderToThere; y++) {
 				final int pos = y * width + x;
 				for (int i = 0; i < c; i++) {
@@ -139,7 +140,7 @@ public class ThemePicFactory {
 
 			borderToHere = borderToThere;
 		}
-		Log.i("blur time", Long.toString(System.nanoTime() - start));
+		Log.i("blur time", Long.toString(System.currentTimeMillis() - start));
 	}
 
 	/**
@@ -152,15 +153,14 @@ public class ThemePicFactory {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	private static double computeDistance(final int x1, final int y1,
-			final int x2, final int y2) {
+	private static double computeDistance(final int x1, final int y1, final int x2, final int y2) {
 		return Math.sqrt((x2 - x1) * (x2 - x1) - (y2 - y1) * (y2 - y1));
 	}
 
 	/**
 	 * Creates a big Drawable. It's as wide one from
-	 * {@link #createNewPicFor(Context, int[], int, int)} but here
-	 * {@code height} is ten times bigger
+	 * {@link #createNewPicFor(Context, int[], int, int)} but here {@code height} is ten times
+	 * bigger
 	 * 
 	 * @param context
 	 *            context of {@link View} of theme to specify resources
@@ -174,8 +174,8 @@ public class ThemePicFactory {
 	 *            of output picture (relative value)
 	 * @return picture of theme, which can be shown in a {@link ThemeActivity}
 	 */
-	public static Drawable createBigImage(final Context context,
-			final int[] swatches, int height, int width) {
+	public static Drawable createBigImage(final Context context, final int[] swatches, int height,
+			int width) {
 		height = height > 0 ? height : ThemePicFactory.height;
 		width = width > 0 ? width : ThemePicFactory.width;
 		height *= 10;
@@ -194,8 +194,7 @@ public class ThemePicFactory {
 	 *            array of color in AlphaRedGreenBlue format
 	 * @return picture for list view with default dimensions
 	 */
-	public static Drawable createNewPicFor(final Context context,
-			final int[] swatches) {
+	public static Drawable createNewPicFor(final Context context, final int[] swatches) {
 		return createNewPicFor(context, swatches, -1, -1);
 	}
 
@@ -214,8 +213,8 @@ public class ThemePicFactory {
 	 *            of output picture (relative value)
 	 * @return picture of theme, which can be shown in a {@link MainActivity}
 	 */
-	public static Drawable createNewPicFor(final Context context,
-			final int[] swatches, int height, int width) {
+	public static Drawable createNewPicFor(final Context context, final int[] swatches, int height,
+			int width) {
 		Log.w("creating", Arrays.toString(swatches));
 		height = height > 0 ? height : ThemePicFactory.height;
 		width = width > 0 ? width : ThemePicFactory.width;
@@ -225,8 +224,7 @@ public class ThemePicFactory {
 		// Log.i("Dimensions", height + "x" + width + " = " + height + "x"
 		// + widthSwatch + "*" + swatches[5]);
 
-		final Bitmap bitmap = Bitmap.createBitmap(width, height,
-				Config.ARGB_8888);
+		final Bitmap bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 		final int[] pixels = createPixels(swatches, height, width, widthSwatch);
 		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 		return new BitmapDrawable(context.getResources(), bitmap);
@@ -242,8 +240,8 @@ public class ThemePicFactory {
 	 * @return array, which is linearized representation of output picture.
 	 *         Color for each pixel of picture stores here
 	 */
-	private static int[] createPixels(final int[] swatches, final int height,
-			final int width, final int widthSwatch) {
+	private static int[] createPixels(final int[] swatches, final int height, final int width,
+			final int widthSwatch) {
 		final int[] output = new int[width * height];
 		final int transparentOffset = 5 - swatches[5];
 
@@ -254,9 +252,9 @@ public class ThemePicFactory {
 		System.gc();
 
 		if (usePowerOfDarkness) {
-			final int[] b = { 2, 2 };
-			final int[] c = { 2, 1 };
-			blur(output, height, width, b, c);
+			final int[] borders = { 1, 1, 1, 1 };
+			final int[] counts = { 4, 3, 2, 1 };
+			blur(output, height, width, borders, counts);
 		}
 		return output;
 	}
@@ -278,7 +276,6 @@ public class ThemePicFactory {
 		g = Math.max((int) (g * FACTOR), 0);
 		b = Math.max((int) (b * FACTOR), 0);
 
-		return (a & 0xFF) << 24 | (r & 0xFF) << 16 | (g & 0xFF) << 8
-				| (b & 0xFF) << 0;
+		return (a & 0xFF) << 24 | (r & 0xFF) << 16 | (g & 0xFF) << 8 | (b & 0xFF) << 0;
 	}
 }

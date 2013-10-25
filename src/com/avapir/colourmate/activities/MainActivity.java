@@ -48,46 +48,46 @@ import com.avapir.colourmate.networking.util.Parser;
  * @author Alpen Ditrix
  * 
  */
-public class MainActivity extends ListActivity implements
-		OnEditorActionListener, OnItemLongClickListener, OnScrollListener {
+public class MainActivity extends ListActivity implements OnEditorActionListener,
+		OnItemLongClickListener, OnScrollListener {
 
 	/**
 	 * Adapter for {@link #models} to {@link #list}
 	 */
-	private SimpleAdapter adapter;
+	private SimpleAdapter		adapter;
 
 	/**
 	 * Software keyboard manager
 	 */
-	private InputMethodManager keyboard;
+	private InputMethodManager	keyboard;
 
 	/**
 	 * Reference to list of this activity
 	 */
-	private ListView list;
+	private ListView			list;
 
 	/**
 	 * It's the place, where list is stored when activity was destroyed after
 	 * receiving some information until activity will be created again. While it
 	 * is created, but not destroyed, this variable will equals {@code null}
 	 */
-	private Parcelable listSavedState;
+	private Parcelable			listSavedState;
 
 	/**
 	 * Field where user will type request
 	 */
-	private EditText requestField;
+	private EditText			requestField;
 
 	/**
 	 * Amount of items which will be downloaded on request
 	 */
-	private int themesPerPage;
+	private int					themesPerPage;
 
 	/**
 	 * Is activity must automatically download color-themes, when list scrolled
 	 * close to end
 	 */
-	private boolean autoupload;
+	private boolean				autoupload;
 
 	/**
 	 * Adds list of model to existing collection. This method can be called on
@@ -140,8 +140,7 @@ public class MainActivity extends ListActivity implements
 	}
 
 	/**
-	 * Public interface for other classes to call
-	 * {@link ArrayAdapter#notifyDataSetChanged()}
+	 * Public interface for other classes to call {@link ArrayAdapter#notifyDataSetChanged()}
 	 */
 	public void notifyAdapterDataSetChanged() {
 		adapter.notifyDataSetChanged();
@@ -154,14 +153,13 @@ public class MainActivity extends ListActivity implements
 	 * android.content.Intent)
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		switch (requestCode) {
 		case ActivityResultCodes.HISTORY:
 			if (resultCode == RESULT_OK) {
-				HistoryManager.inflateHistoryElement(this,
-						data.getIntExtra("index", -1));
+				HistoryManager.inflateHistoryElement(this, data.getIntExtra("index", -1));
 			}
-			break;
+		break;
 		default:
 			throw new RuntimeException("No handler for that request code: "
 					+ Integer.toString(requestCode));
@@ -175,21 +173,18 @@ public class MainActivity extends ListActivity implements
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		DataManager.setContext(this);
-		keyboard = (InputMethodManager) getBaseContext()
-				.getSystemService(INPUT_METHOD_SERVICE);
+		keyboard = (InputMethodManager) getBaseContext().getSystemService(INPUT_METHOD_SERVICE);
 		INIT_findViews();
 		INIT_setListeners();
 
-		String[] from = { Parser.__AUTHOR, Parser.__EDITED_AT,
-				Parser._SMALL_PICTURE, Parser.__TITLE };
-		int[] to = { R.id.text_theme_list_author,
-				R.id.text_theme_list_edited_at, R.id.image_theme_list_swatches,
-				R.id.text_theme_list_title };
+		final String[] from = { Parser.__AUTHOR, Parser.__EDITED_AT, Parser._SMALL_PICTURE,
+				Parser.__TITLE };
+		final int[] to = { R.id.text_theme_list_author, R.id.text_theme_list_edited_at,
+				R.id.image_theme_list_swatches, R.id.text_theme_list_title };
 
-		adapter = new SimpleAdapter(this, models, R.layout.list_theme_item,
-				from, to);
+		adapter = new SimpleAdapter(this, models, R.layout.list_theme_item, from, to);
 		adapter.setViewBinder(new CustomPictureBinder());
 		list.setAdapter(adapter);
 
@@ -209,19 +204,19 @@ public class MainActivity extends ListActivity implements
 	 * Simulates {@link #onFillButtonClicked(View)} on demand
 	 */
 	@Override
-	public boolean onEditorAction(final TextView v, final int actionId,
-			final KeyEvent event) {
+	public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER
 				|| event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
-			MainActivity.this
-					.simulateButtonPress("Request from software keyboard");
+			MainActivity.this.simulateButtonPress("Request from software keyboard");
 		}
 		return false;
 	}
 
 	/**
 	 * When user want to do request with typed text, he must "say" it to device
-	 * through some way. Whenever it happens, this method will be called
+	 * through some way. Whenever it happens, this method will be called.
+	 * Addidtion to listView takes place from the Task, because HERE I don't
+	 * know about load/upload type of this request
 	 * 
 	 * @param view
 	 *            view, from which this method was called through
@@ -238,8 +233,8 @@ public class MainActivity extends ListActivity implements
 	 * XXX list long click options
 	 */
 	@Override
-	public boolean onItemLongClick(final AdapterView<?> adapterView,
-			final View view, final int position, final long id) {
+	public boolean onItemLongClick(final AdapterView<?> adapterView, final View view,
+			final int position, final long id) {
 		showToast("LongClick at pos " + position);
 		return false;
 	}
@@ -248,13 +243,11 @@ public class MainActivity extends ListActivity implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void onListItemClick(final ListView l, final View v,
-			final int position, final long id) {
+	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
 		// showToast("Opening "
 		// + models.get(position).get(SearchRequestTask._THEME_NAME));
-		startActivity(new Intent(this, ThemeActivity.class).putExtra(
-				"themePos", position));
+		startActivity(new Intent(this, ThemeActivity.class).putExtra("themePos", position));
 	}
 
 	/**
@@ -272,7 +265,7 @@ public class MainActivity extends ListActivity implements
 			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		case R.id.menu_help:
-			AlertDialog.Builder help = new AlertDialog.Builder(this);
+			final AlertDialog.Builder help = new AlertDialog.Builder(this);
 			help.setTitle(getText(R.string.help));
 			help.setIcon(android.R.drawable.ic_dialog_info);
 			help.setMessage("To search some color-themes type your search request string into field and press the button.\nYou may also left field empty to load currently most popular themes.\nUse filters to make special requests: \'title\', \'author\', \'tag\', \'email\', \'hex\', \'themeID\', \'userID\'. Use it this way: \"author:adobe\"");
@@ -280,7 +273,7 @@ public class MainActivity extends ListActivity implements
 			help.show();
 			return true;
 		case R.id.menu_about:
-			AlertDialog.Builder about = new AlertDialog.Builder(this);
+			final AlertDialog.Builder about = new AlertDialog.Builder(this);
 			about.setTitle(R.string.about);
 			about.setIcon(R.drawable.ic_launcher);
 			about.setMessage(R.string.helloprealpha);
@@ -334,22 +327,19 @@ public class MainActivity extends ListActivity implements
 	}
 
 	@Override
-	public void onScrollStateChanged(final AbsListView view,
-			final int scrollState) {
-	}
+	public void onScrollStateChanged(final AbsListView view, final int scrollState) {}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		final SharedPreferences shared = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
-		themesPerPage = Integer.parseInt(shared.getString("themes_per_page",
-				"15"));
+		themesPerPage = Integer.parseInt(shared.getString("themes_per_page", "15"));
 		autoupload = shared.getBoolean("autoupload", true);
-		int size = Integer.parseInt(shared.getString("history_size", "10"));
+		final int size = Integer.parseInt(shared.getString("history_size", "10"));
 		HistoryManager.setHistorySize(size);
-		boolean useHistory = shared.getBoolean("use_history", true);
-		HistoryManager.setEnabled(useHistory);
+		// boolean useHistory = shared.getBoolean("use_history", true);
+		// HistoryManager.setEnabled(useHistory);
 	}
 
 	/**

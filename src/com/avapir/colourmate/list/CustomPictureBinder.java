@@ -22,8 +22,7 @@ import com.avapir.colourmate.R;
 public class CustomPictureBinder implements ViewBinder {
 
 	@Override
-	public boolean setViewValue(View view, Object data,
-			String textRepresentation) {
+	public boolean setViewValue(final View view, final Object data, final String textRepresentation) {
 		view.getContext();
 		// TODO highlight substrings by which search was made
 		switch (view.getId()) {

@@ -29,13 +29,18 @@ public class DataManager {
 		/**
 		 * Gathered from "strings.xml" names of months
 		 */
-		public static final CharSequence[] mounths = { getText(R.string.jan),
-				getText(R.string.feb), getText(R.string.mar),
-				getText(R.string.apr), getText(R.string.may),
-				getText(R.string.jun), getText(R.string.jul),
-				getText(R.string.aug), getText(R.string.sep),
-				getText(R.string.oct), getText(R.string.nov),
-				getText(R.string.dec), };
+		public static final CharSequence[]	mounths	= { getText(R.string.jan),
+															getText(R.string.feb),
+															getText(R.string.mar),
+															getText(R.string.apr),
+															getText(R.string.may),
+															getText(R.string.jun),
+															getText(R.string.jul),
+															getText(R.string.aug),
+															getText(R.string.sep),
+															getText(R.string.oct),
+															getText(R.string.nov),
+															getText(R.string.dec), };
 
 		/**
 		 * 
@@ -43,8 +48,7 @@ public class DataManager {
 		 *            date in Kuler-theme-XML format: DDMMYYYY
 		 * @return date in format DD-MOUNTH-YYYY
 		 */
-		public static CharSequence fromKulerToHumanFormat(
-				final String dateInKulerFormat) {
+		public static CharSequence fromKulerToHumanFormat(final String dateInKulerFormat) {
 			// XXX different formatting for differen locales
 			if (dateInKulerFormat.length() != 8) {
 				throw new IllegalArgumentException();
@@ -66,12 +70,12 @@ public class DataManager {
 	/**
 	 * List which stores models of downloaded items
 	 */
-	public static List<Map<String, Object>> models = new ArrayList<Map<String, Object>>();
+	public static List<Map<String, Object>>	models	= new ArrayList<Map<String, Object>>();
 
 	/**
 	 * String "by "
 	 */
-	public static String BY_AUTHOR;
+	public static String					BY_AUTHOR;
 
 	/**
 	 * String "Last edit: "
@@ -79,12 +83,12 @@ public class DataManager {
 	 * @deprecated
 	 */
 	@Deprecated
-	public static String LAST_EDITED_AT;
+	public static String					LAST_EDITED_AT;
 
 	/**
 	 * Context last created {@link MainActivity}
 	 */
-	static Context runningActivityContext;
+	static Context							runningActivityContext;
 
 	/**
 	 * Returns string from resources
@@ -131,10 +135,12 @@ public class DataManager {
 
 	/**
 	 * Shows alert dialog which says, what called function is under development
-	 * @param context where to show dialog
+	 * 
+	 * @param context
+	 *            where to show dialog
 	 */
-	public static void showAlertUnderDevelopment(Context context) {
-		AlertDialog.Builder adb = new AlertDialog.Builder(context);
+	public static void showAlertUnderDevelopment(final Context context) {
+		final AlertDialog.Builder adb = new AlertDialog.Builder(context);
 		adb.setTitle("Sorry =(");
 		adb.setIcon(android.R.drawable.ic_dialog_alert);
 		adb.setMessage("Unfortunately this functions is under development. I'll do this as soon as possible.");

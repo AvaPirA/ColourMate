@@ -7,20 +7,20 @@ import java.util.Map;
 
 import android.os.AsyncTask;
 
-public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String,Object>>> {
+public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String, Object>>> {
 
-	private String ID;
-	
-	public CommentsRequestTask(String ID){
+	private final String	ID;
+
+	public CommentsRequestTask(final String ID) {
 		this.ID = ID;
 	}
-	
+
 	@Override
-	protected List<Map<String,Object>> doInBackground(Void... params) {
-		
+	protected List<Map<String, Object>> doInBackground(final Void... params) {
+
 		try {
-			URL link = new URL(new CommentsRequestConstructor().makeRequest(ID));
-		} catch (MalformedURLException e) {
+			new URL(new CommentsRequestConstructor().makeRequest(ID));
+		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 		}
 
@@ -28,7 +28,7 @@ public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String,O
 	}
 
 	@Override
-	protected void onPostExecute(List<Map<String,Object>> result) {
+	protected void onPostExecute(final List<Map<String, Object>> result) {
 		super.onPostExecute(result);
 	}
 

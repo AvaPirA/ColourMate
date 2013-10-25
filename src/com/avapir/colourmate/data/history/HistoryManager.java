@@ -15,6 +15,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.avapir.colourmate.BuildConfig;
 import com.avapir.colourmate.activities.MainActivity;
 import com.avapir.colourmate.list.ThemePicFactory;
 import com.avapir.colourmate.networking.util.Parser;
@@ -34,24 +35,24 @@ public class HistoryManager {
 
 	/* table fields keys */
 
-	private static final String ID = "_id";
-	private static final String TITLE = "title";
-	private static final String AUTHOR = "author";
-	private static final String EDITED_AT = "edited_at";
-	private static final String RATING = "rating";
-	private static final String COLOR = "color";
+	private static final String			ID					= "_id";
+	private static final String			TITLE				= "title";
+	private static final String			AUTHOR				= "author";
+	private static final String			EDITED_AT			= "edited_at";
+	private static final String			RATING				= "rating";
+	private static final String			COLOR				= "color";
 	/**
 	 * Keys for table placed in proper order (which I chose) to store
 	 * information in database:<br>
 	 * ID, TITLE, AUTHOR,EDITED_AT, RATING, COLOR
 	 */
-	private static final String[] ORDERED_TABLE_KEYS = { ID, TITLE, AUTHOR,
-			EDITED_AT, RATING, COLOR };
+	private static final String[]		ORDERED_TABLE_KEYS	= { ID, TITLE, AUTHOR, EDITED_AT,
+			RATING, COLOR									};
 
 	/**
 	 * Localized date formatter
 	 */
-	private static DateFormat sdf = DateFormat.getDateInstance();
+	private static DateFormat			sdf					= DateFormat.getDateInstance();
 
 	/**
 	 * List of requestStrings and dates, when those requests was made. They must
@@ -61,13 +62,13 @@ public class HistoryManager {
 	 * and<br>
 	 * {@code listElement[1] == date}
 	 */
-	private static LinkedList<String> titles = new LinkedList<String>();
-	private static LinkedList<String> dates = new LinkedList<String>();
+	private static LinkedList<String>	titles				= new LinkedList<String>();
+	private static LinkedList<String>	dates				= new LinkedList<String>();
 
 	/**
 	 * Maximum amount of existing tables in database
 	 */
-	static int historyMaxSize;
+	static int							historyMaxSize;
 
 	/**
 	 * Load information of one of previously saved requests<br>
@@ -80,35 +81,30 @@ public class HistoryManager {
 	 *            string, which defines that request
 	 * @return
 	 */
-	private static List<Map<String, Object>> createListFromDatabase(
-			final Context context, String requestString) {
-		SQLiteDatabase db = new HistoryDBSupport(context, null)
-				.getReadableDatabase();
-		List<Map<String, Object>> outList = new ArrayList<Map<String, Object>>();
-		final Cursor c = db.query(requestString, null, null, null, null, null,
-				null);
+	private static List<Map<String, Object>> createListFromDatabase(final Context context,
+			final String requestString) {
+		final SQLiteDatabase db = new HistoryDBSupport(context, null).getReadableDatabase();
+		final List<Map<String, Object>> outList = new ArrayList<Map<String, Object>>();
+		final Cursor c = db.query(requestString, null, null, null, null, null, null);
 		if (c.moveToFirst()) {
 			do {
-				final int[] indexes = { c.getColumnIndex(ID),
-						c.getColumnIndex(TITLE), c.getColumnIndex(AUTHOR),
-						c.getColumnIndex(EDITED_AT), c.getColumnIndex(RATING),
-						c.getColumnIndex(COLOR + 0),
-						c.getColumnIndex(COLOR + 1),
-						c.getColumnIndex(COLOR + 2),
-						c.getColumnIndex(COLOR + 3),
-						c.getColumnIndex(COLOR + 4) };
-				Map<String, Object> map = new HashMap<String, Object>() {
-					private static final long serialVersionUID = 7379284267295850850L;
+				final int[] indexes = { c.getColumnIndex(ID), c.getColumnIndex(TITLE),
+						c.getColumnIndex(AUTHOR), c.getColumnIndex(EDITED_AT),
+						c.getColumnIndex(RATING), c.getColumnIndex(COLOR + 0),
+						c.getColumnIndex(COLOR + 1), c.getColumnIndex(COLOR + 2),
+						c.getColumnIndex(COLOR + 3), c.getColumnIndex(COLOR + 4) };
+				final Map<String, Object> map = new HashMap<String, Object>() {
+					private static final long	serialVersionUID	= 7379284267295850850L;
 
 					{
 						for (int i = 0; i < 5; i++) {
 							put(ORDERED_KEYS[i], c.getString(indexes[i]));
 						}
-						int[] swatches = new int[6];
+						final int[] swatches = new int[6];
 						swatches[5] = -1;// if it will change => this theme has
 											// less than 5 colors
 						for (int i = 0; i < 5; i++) {
-							String str = c.getString(5 + i);
+							final String str = c.getString(5 + i);
 							if (str != null) {
 								swatches[i] = Integer.parseInt(str);
 							} else {
@@ -125,10 +121,9 @@ public class HistoryManager {
 						}
 						swatches[5] = swatches[5] == -1 ? 5 : swatches[5];
 						put(ORDERED_KEYS[5], swatches);
-						put(ORDERED_KEYS[6], ThemePicFactory.createNewPicFor(
-								context, swatches));
-						put(ORDERED_KEYS[7], ThemePicFactory.createBigImage(
-								context, swatches, -1, -1));
+						put(ORDERED_KEYS[6], ThemePicFactory.createNewPicFor(context, swatches));
+						put(ORDERED_KEYS[7],
+								ThemePicFactory.createBigImage(context, swatches, -1, -1));
 					}
 				};
 				outList.add(map);
@@ -145,9 +140,8 @@ public class HistoryManager {
 	 * @param listActivity
 	 * @param i
 	 */
-	public static void inflateHistoryElement(MainActivity listActivity, int i) {
-		List<Map<String, Object>> that = createListFromDatabase(listActivity,
-				titles.get(i));
+	public static void inflateHistoryElement(final MainActivity listActivity, final int i) {
+		final List<Map<String, Object>> that = createListFromDatabase(listActivity, titles.get(i));
 		listActivity.replaceModelsBy(that);
 	}
 
@@ -157,15 +151,15 @@ public class HistoryManager {
 	 * @param result
 	 * @param database
 	 */
-	private static void saveListToDatabase(String requestString,
-			List<Map<String, Object>> result, SQLiteDatabase database) {
-		for (Map<String, Object> map : result) {
-			ContentValues cv = new ContentValues();
+	private static void saveListToDatabase(final String requestString,
+			final List<Map<String, Object>> result, final SQLiteDatabase database) {
+		for (final Map<String, Object> map : result) {
+			final ContentValues cv = new ContentValues();
 			for (int i = 0; i < 5; i++) {
 				cv.put(ORDERED_TABLE_KEYS[i], (String) map.get(ORDERED_KEYS[i]));
 			}
-			int[] swatches = (int[]) map.get(ORDERED_KEYS[5]);
-			int swatchesUsed = swatches[5];
+			final int[] swatches = (int[]) map.get(ORDERED_KEYS[5]);
+			final int swatchesUsed = swatches[5];
 			for (int i = 0; i < 5; i++) {
 				if (i < swatchesUsed) {
 					cv.put(COLOR + i, Integer.toString(swatches[i]));
@@ -188,13 +182,13 @@ public class HistoryManager {
 	 * @param result
 	 *            server's response
 	 */
-	public static void saveNew(Context context, String requestString,
-			List<Map<String, Object>> result) {
-		if (!isEnabled){
+	public static void saveNew(final Context context, final String requestString,
+			final List<Map<String, Object>> result) {
+		if (!(isEnabled && BuildConfig.HISTORY_ENABLED)) {
 			return;
 		}
-		HistoryDBSupport hdbs = new HistoryDBSupport(context, requestString);
-		SQLiteDatabase database = hdbs.getWritableDatabase();
+		final HistoryDBSupport hdbs = new HistoryDBSupport(context, requestString);
+		final SQLiteDatabase database = hdbs.getWritableDatabase();
 		titles.add(requestString);
 		dates.add(sdf.format(new Date(System.currentTimeMillis())));
 		if (titles.size() > historyMaxSize) {
@@ -209,17 +203,17 @@ public class HistoryManager {
 	 * @param historySize
 	 *            the historySize to set
 	 */
-	public static void setHistorySize(int historySize) {
+	public static void setHistorySize(final int historySize) {
 		HistoryManager.historyMaxSize = historySize;
 	}
 
 	public static String[] getTitles() {
 		return titles.toArray(new String[titles.size()]);
 	}
-	
-	private static boolean isEnabled;
 
-	public static void setEnabled(boolean useHistory) {
+	private static boolean	isEnabled	= false;
+
+	public static void setEnabled(final boolean useHistory) {
 		isEnabled = useHistory;
 	}
 

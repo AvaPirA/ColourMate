@@ -22,7 +22,7 @@ public class HttpGetter {
 	/**
 	 * @see HttpGet
 	 */
-	HttpGet httpRequest;
+	HttpGet	httpRequest;
 
 	/**
 	 * Empty constructor
@@ -51,8 +51,7 @@ public class HttpGetter {
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
-	public InputStream openHttpGet(final String link) throws IOException,
-			URISyntaxException {
+	public InputStream openHttpGet(final String link) throws IOException, URISyntaxException {
 		httpRequest.setURI(new URI(link));
 		final HttpClient httpclient = new DefaultHttpClient();
 		final HttpResponse response = httpclient.execute(httpRequest);

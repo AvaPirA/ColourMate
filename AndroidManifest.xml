@@ -56,6 +56,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.avapir.colourmate.activities.MainActivity" />
         </activity>
+        <activity
+            android:name="com.avapir.colourmate.activities.UnderConstructionActivity"
+            android:label="@string/title_activity_under_construction" >
+        </activity>
     </application>
 
 </manifest>

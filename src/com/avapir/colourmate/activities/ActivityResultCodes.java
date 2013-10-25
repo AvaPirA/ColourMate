@@ -15,6 +15,6 @@ public class ActivityResultCodes {
 	/**
 	 * Use with {@link HistoryActivity}
 	 */
-	public static final int HISTORY = 0x10;
+	public static final int	HISTORY	= 0x10;
 
 }

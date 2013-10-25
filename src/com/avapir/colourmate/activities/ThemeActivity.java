@@ -32,13 +32,13 @@ import com.avapir.colourmate.networking.util.Parser;
 @SuppressWarnings("javadoc")
 public class ThemeActivity extends Activity implements OnClickListener {
 
-	private Map<String, Object> model;
+	private Map<String, Object>	model;
 
-	private TextView title;
-	private TextView author;
-	private ImageView image;
-	private RatingBar rating;
-	private Button getComments;
+	private TextView			title;
+	private TextView			author;
+	private ImageView			image;
+	private RatingBar			rating;
+	private Button				getComments;
 
 	/**
 	 * Binds {@link View} variables to thems real representations on the screen
@@ -52,13 +52,12 @@ public class ThemeActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	protected void onActivityResult(final int requestCode,
-			final int resultCode, final Intent data) {
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(final View v) {
 		DataManager.showAlertUnderDevelopment(this);
 		// (new CommentsRequestTask(model.id)).execute();
 	}
@@ -66,7 +65,7 @@ public class ThemeActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.theme);
+		setContentView(R.layout.activity_theme);
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		DataManager.setContext(this);
@@ -74,8 +73,7 @@ public class ThemeActivity extends Activity implements OnClickListener {
 		setUpListeners();
 		model = models.get(getIntent().getExtras().getInt("themePos"));
 		if (model == null) {
-			throw new NullPointerException(
-					"No model to set was received from parent activity");
+			throw new NullPointerException("No model to set was received from parent activity");
 		}
 		setUpModel();
 	}
@@ -85,6 +83,9 @@ public class ThemeActivity extends Activity implements OnClickListener {
 		// TODO "favorites"
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_theme, menu);
+
+		menu.findItem(R.id.menu_add_to_favourities);
+
 		return true;
 	}
 
@@ -93,9 +94,9 @@ public class ThemeActivity extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
-			break;
-		case R.id.menu_add_to_favs:
-			//TODO ADD_TO_FAVOURITES
+		break;
+		case R.id.menu_add_to_favourities:
+			// TODO case R.id.menu_ADD_TO_FAVOURITES
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -108,10 +109,8 @@ public class ThemeActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(final View v) {
-				final Intent searchByAuthor = new Intent(ThemeActivity.this,
-						MainActivity.class);
-				searchByAuthor.putExtra("searchLine",
-						"author:".concat(author.getText().toString()));
+				final Intent searchByAuthor = new Intent(ThemeActivity.this, MainActivity.class);
+				searchByAuthor.putExtra("searchLine", "author:".concat(author.getText().toString()));
 				startActivity(searchByAuthor);
 			}
 		});

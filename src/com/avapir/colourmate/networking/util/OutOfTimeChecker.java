@@ -11,12 +11,12 @@ import android.util.Log;
 @SuppressWarnings({ "javadoc", "rawtypes" })
 public class OutOfTimeChecker implements Runnable {
 
-	private static final int TIME_LIMIT = 30 * 1000;
+	private static final int	TIME_LIMIT	= 30 * 1000;
 
 	/**
 	 * Callback to task, which must be checked and cancelled if needed
 	 */
-	AsyncTask checkingTask;
+	AsyncTask					checkingTask;
 
 	/**
 	 * Simple constructor

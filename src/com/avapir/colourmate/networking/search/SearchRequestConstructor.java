@@ -20,18 +20,18 @@ public class SearchRequestConstructor extends RequestCostructor {
 	 * load from themes by current request from first page, or when it's needed
 	 * to load only next page for similar request
 	 */
-	private static String previousRequest = "";
+	private static String		previousRequest			= "";
 
-	private final MainActivity activity;
+	private final MainActivity	activity;
 
 	// ===========================__MODES__====================================
-	private static final String MODE_GET_RATING_LIST = "get.cfm?listtype=rating";
-	private static final String MODE_SEARCH = "search.cfm?searchQuery=";
-	private static final String OTHER_MODE_PER_PAGE = "&itemsPerPage=";
+	private static final String	MODE_GET_RATING_LIST	= "get.cfm?listtype=rating";
+	private static final String	MODE_SEARCH				= "search.cfm?searchQuery=";
+	private static final String	OTHER_MODE_PER_PAGE		= "&itemsPerPage=";
 	// ===========================___OTHER_MODES___============================
-	private static final String OTHER_MODE_START_INDEX = "&startIndex=";
+	private static final String	OTHER_MODE_START_INDEX	= "&startIndex=";
 
-	private boolean uploadingMore = false;
+	private boolean				uploadingMore			= false;
 
 	public SearchRequestConstructor(final MainActivity activity) {
 		this.activity = activity;
@@ -47,11 +47,10 @@ public class SearchRequestConstructor extends RequestCostructor {
 	 * @return corresponding request template
 	 */
 	@Override
-	protected String chooseMode(Object... properties) {
+	protected String chooseMode(final Object... properties) {
 		final int l = (Integer) properties[0];
 		Log.w("RequestLength", Integer.toString(l));
-		return l > 0 ? new String(MODE_SEARCH) : new String(
-				MODE_GET_RATING_LIST);
+		return l > 0 ? new String(MODE_SEARCH) : new String(MODE_GET_RATING_LIST);
 	}
 
 	public boolean isUploading() {
@@ -90,7 +89,7 @@ public class SearchRequestConstructor extends RequestCostructor {
 	 * @return modificatiors to concat to main request
 	 */
 	@Override
-	protected String otherProperties(Object... properties) {
+	protected String otherProperties(final Object... properties) {
 		String other = "";
 		int loadedCount;
 		if (uploadingMore) {
@@ -99,10 +98,9 @@ public class SearchRequestConstructor extends RequestCostructor {
 			loadedCount = 0;
 		}
 		if (loadedCount > 0) {
-			other = other.concat(OTHER_MODE_START_INDEX).concat(
-					Integer.toString(loadedCount));
+			other = other.concat(OTHER_MODE_START_INDEX).concat(Integer.toString(loadedCount));
 		}
-		int themesPerPage = activity.getPageSize();
+		final int themesPerPage = activity.getPageSize();
 		other = other.concat(OTHER_MODE_PER_PAGE).concat(
 				Integer.toString(themesPerPage < 15 ? 15 : themesPerPage));
 		return other;
