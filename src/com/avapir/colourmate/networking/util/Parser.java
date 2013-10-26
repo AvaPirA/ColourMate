@@ -16,40 +16,40 @@ import com.avapir.colourmate.list.ThemePicFactory;
 @SuppressWarnings("javadoc")
 public class Parser {
 
-	public static final String				__AUTHOR			= "author";
-	public static final String				__EDITED_AT			= "editedAt";
-	public static final String				__TITLE				= "name";
-	public static final String				__SWATCHES			= "swatches";
-	public static final String				__ID				= "id";
-	public static final String				__RATING			= "rating";
-	public static final String				_SMALL_PICTURE		= "picture";
-	public static final String				_BIG_PICTURE		= "big_picture";
-	public static final String[]			ORDERED_KEYS		= { __ID, __TITLE, __AUTHOR,
-			__EDITED_AT, __RATING, __SWATCHES, _SMALL_PICTURE, _BIG_PICTURE };
+	public static final String		__AUTHOR			= "author";
+	public static final String		__EDITED_AT			= "editedAt";
+	public static final String		__TITLE				= "name";
+	public static final String		__SWATCHES			= "swatches";
+	public static final String		__ID				= "id";
+	public static final String		__RATING			= "rating";
+	public static final String		_SMALL_PICTURE		= "picture";
+	public static final String		_BIG_PICTURE		= "big_picture";
+	public static final String[]	ORDERED_KEYS		= { __ID, __TITLE, __AUTHOR, __EDITED_AT,
+			__RATING, __SWATCHES, _SMALL_PICTURE, _BIG_PICTURE };
 
-	private static final int				INDEX_AUTHOR_NODE	= 3;
+	private static final int		INDEX_AUTHOR_NODE	= 3;
 	@SuppressWarnings("unused")
-	private static final int				INDEX_CREATED_AT	= 7;
-
-	@SuppressWarnings("unused")
-	private static final int				INDEX_DOWNLOADS		= 6;
-	private static final int				INDEX_EDITED_AT		= 8;
-	private static final int				INDEX_ID			= 0;
-	@SuppressWarnings("unused")
-	private static final int				INDEX_IMAGE_LINK	= 2;
-
-	private static final int				INDEX_RATING		= 5;
-	private static final int				INDEX_SWATCHES		= 9;
+	private static final int		INDEX_CREATED_AT	= 7;
 
 	@SuppressWarnings("unused")
-	private static final int				INDEX_TAGS			= 4;
+	private static final int		INDEX_DOWNLOADS		= 6;
+	private static final int		INDEX_EDITED_AT		= 8;
+	private static final int		INDEX_ID			= 0;
+	@SuppressWarnings("unused")
+	private static final int		INDEX_IMAGE_LINK	= 2;
 
-	private static final int				INDEX_TITLE			= 1;
+	private static final int		INDEX_RATING		= 5;
+	private static final int		INDEX_SWATCHES		= 9;
 
-	public static final int					EMPTY_COLOR			= 0x00FFffFF;
+	@SuppressWarnings("unused")
+	private static final int		INDEX_TAGS			= 4;
+
+	private static final int		INDEX_TITLE			= 1;
+
+	public static final int			EMPTY_COLOR			= 0x00FFffFF;
 
 	private final List<KulerTheme>	returnList;
-	private final Context					context;
+	private final Context			context;
 
 	public Parser(final Context c, final List<KulerTheme> list) {
 		context = c;

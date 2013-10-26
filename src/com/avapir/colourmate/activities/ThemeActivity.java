@@ -1,9 +1,6 @@
 package com.avapir.colourmate.activities;
 
 import static com.avapir.colourmate.data.DataManager.models;
-
-import java.util.Map;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.avapir.colourmate.R;
@@ -35,11 +31,10 @@ public class ThemeActivity extends Activity implements OnClickListener {
 
 	private KulerTheme	model;
 
-	private TextView			title;
-	private TextView			author;
-	private ImageView			image;
-	private RatingBar			rating;
-	private Button				getComments;
+	private TextView	title;
+	private TextView	author;
+	private ImageView	image;
+	private Button		getComments;
 
 	/**
 	 * Binds {@link View} variables to thems real representations on the screen
@@ -48,7 +43,6 @@ public class ThemeActivity extends Activity implements OnClickListener {
 		title = (TextView) findViewById(R.id.text_theme_title);
 		author = (TextView) findViewById(R.id.text_theme_author);
 		image = (ImageView) findViewById(R.id.image_theme_swatches);
-		rating = (RatingBar) findViewById(R.id.image_theme_rating);
 		getComments = (Button) findViewById(R.id.button_theme_comments);
 	}
 

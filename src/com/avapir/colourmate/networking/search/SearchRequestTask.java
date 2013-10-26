@@ -3,7 +3,6 @@ package com.avapir.colourmate.networking.search;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -65,7 +64,7 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<KulerTheme>>
 	/**
 	 * Link in string representation, created by {@link RequestConstructor}
 	 */
-	private String						link;
+	private String				link;
 
 	/**
 	 * Model will be parsed from received XML-file and stored here
@@ -76,7 +75,7 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<KulerTheme>>
 	 * Link on activity, which executed this task and where will be put parsed
 	 * List of data. All {@link Context} used in task will be got from that
 	 */
-	private final MainActivity			listActivity;
+	private final MainActivity	listActivity;
 
 	/**
 	 * Creates default search-task.
@@ -95,20 +94,39 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<KulerTheme>>
 	 * seconds. This made by creating delayed for 30 seconds message on start of
 	 * "working" and removing that message if task complited
 	 */
-	Handler	outOfTimeHandler	= new Handler() {
-									@Override
-									public void handleMessage(final Message msg) {
-										super.handleMessage(msg);
-										if (msg.what == TIME_EXPIRED
-												&& SearchRequestTask.this.getStatus() != AsyncTask.Status.FINISHED) {
-											SearchRequestTask.this.cancel(true);
-											Toast.makeText(listActivity,
-													R.string.networking_error_time_expired,
-													Toast.LENGTH_LONG).show();
-										}
-									}
+	Handler	outOfTimeHandler	= new MyHandler(this);
 
-								};
+	/**
+	 * Timeout-handler implementation
+	 * 
+	 * @author Alpen Ditrix
+	 */
+	private static class MyHandler extends Handler {
+		
+		/**
+		 * Handling task
+		 */
+		private SearchRequestTask	srt;
+
+		/**
+		 * Default constructor
+		 * @param srt
+		 */
+		public MyHandler(SearchRequestTask srt) {
+			this.srt = srt;
+		}
+
+		@Override
+		public void handleMessage(final Message msg) {
+			super.handleMessage(msg);
+			if (msg.what == TIME_EXPIRED && srt.getStatus() != AsyncTask.Status.FINISHED) {
+				srt.cancel(true);
+				Toast.makeText(srt.listActivity, R.string.networking_error_time_expired,
+						Toast.LENGTH_LONG).show();
+			}
+		}
+
+	}
 
 	@Override
 	protected List<KulerTheme> doInBackground(final String... requestString) {

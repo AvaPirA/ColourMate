@@ -3,11 +3,10 @@ package com.avapir.colourmate.networking.comments;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
-
-import com.avapir.colourmate.data.KulerTheme;
 
 import android.os.AsyncTask;
+
+import com.avapir.colourmate.data.KulerTheme;
 
 public class CommentsRequestTask extends AsyncTask<Void, Void, List<KulerTheme>> {
 

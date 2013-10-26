@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.avapir.colourmate.activities.MainActivity;
 import com.avapir.colourmate.activities.ThemeActivity;
-import com.avapir.colourmate.data.KulerTheme;
 
 /**
  * Creates a {@link Drawable} of theme using swatches created from HEX-color
@@ -282,14 +281,19 @@ public class ThemePicFactory {
 
 	/**
 	 * Sets new value from settings
-	 * @param h new height
+	 * 
+	 * @param h
+	 *            new height
 	 */
-	public static void setHeight(int h) {
+	public static void setHeight(final int h) {
 		height = h;
 		widthSwatch = height * 2;
 		width = widthSwatch * 5;
 	}
 
+	/**
+	 * @return currently used height of swhatch
+	 */
 	public static int getHeight() {
 		return height;
 	}

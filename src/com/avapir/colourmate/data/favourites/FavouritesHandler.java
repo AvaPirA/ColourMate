@@ -1,7 +1,6 @@
 package com.avapir.colourmate.data.favourites;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import com.avapir.colourmate.data.KulerTheme;
 

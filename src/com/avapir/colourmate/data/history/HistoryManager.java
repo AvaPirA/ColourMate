@@ -5,17 +5,14 @@ import static com.avapir.colourmate.networking.util.Parser.ORDERED_KEYS;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.avapir.colourmate.BuildConfig;
 import com.avapir.colourmate.activities.MainActivity;
 import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.list.ThemePicFactory;

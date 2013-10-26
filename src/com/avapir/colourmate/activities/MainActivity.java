@@ -3,7 +3,6 @@ package com.avapir.colourmate.activities;
 import static com.avapir.colourmate.data.DataManager.models;
 
 import java.util.List;
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -343,9 +342,9 @@ public class MainActivity extends ListActivity implements OnEditorActionListener
 		final int size = Integer.parseInt(shared.getString("history_size", "10"));
 		HistoryManager.setHistorySize(size);
 		// int themeIconHeight = Integer.parseInt(shared.getString("theme_icon_height", "20"));
-		Point screenSize = new Point();
+		final Point screenSize = new Point();
 		getWindowManager().getDefaultDisplay().getSize(screenSize);
-		int themeIconHeight = screenSize.x * 5 / 16 / 5;
+		final int themeIconHeight = screenSize.x * 5 / 16 / 5;
 		ThemePicFactory.setHeight(themeIconHeight);
 		// boolean useHistory = shared.getBoolean("use_history", true);
 		// HistoryManager.setEnabled(useHistory);

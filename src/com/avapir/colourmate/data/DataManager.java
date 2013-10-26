@@ -2,7 +2,6 @@ package com.avapir.colourmate.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -75,7 +74,7 @@ public class DataManager {
 	/**
 	 * String "by "
 	 */
-	public static String					BY_AUTHOR;
+	public static String			BY_AUTHOR;
 
 	/**
 	 * String "Last edit: "
@@ -83,12 +82,12 @@ public class DataManager {
 	 * @deprecated
 	 */
 	@Deprecated
-	public static String					LAST_EDITED_AT;
+	public static String			LAST_EDITED_AT;
 
 	/**
 	 * Context last created {@link MainActivity}
 	 */
-	static Context							runningActivityContext;
+	static Context					runningActivityContext;
 
 	/**
 	 * Returns string from resources
