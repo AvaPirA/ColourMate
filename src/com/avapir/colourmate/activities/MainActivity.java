@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -33,8 +34,10 @@ import android.widget.Toast;
 
 import com.avapir.colourmate.R;
 import com.avapir.colourmate.data.DataManager;
+import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.data.history.HistoryManager;
 import com.avapir.colourmate.list.CustomPictureBinder;
+import com.avapir.colourmate.list.ThemePicFactory;
 import com.avapir.colourmate.networking.search.SearchRequestTask;
 import com.avapir.colourmate.networking.util.Parser;
 
@@ -95,7 +98,7 @@ public class MainActivity extends ListActivity implements OnEditorActionListener
 	 * 
 	 * @param modelsToAdd
 	 */
-	public void addAllThoseModels(final List<Map<String, Object>> modelsToAdd) {
+	public void addAllThoseModels(final List<KulerTheme> modelsToAdd) {
 		models.addAll(modelsToAdd);
 		adapter.notifyDataSetChanged();
 	}
@@ -174,6 +177,7 @@ public class MainActivity extends ListActivity implements OnEditorActionListener
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		KulerTheme.setApplicationContext(getApplicationContext());
 		DataManager.setContext(this);
 		keyboard = (InputMethodManager) getBaseContext().getSystemService(INPUT_METHOD_SERVICE);
 		INIT_findViews();
@@ -338,6 +342,11 @@ public class MainActivity extends ListActivity implements OnEditorActionListener
 		autoupload = shared.getBoolean("autoupload", true);
 		final int size = Integer.parseInt(shared.getString("history_size", "10"));
 		HistoryManager.setHistorySize(size);
+		// int themeIconHeight = Integer.parseInt(shared.getString("theme_icon_height", "20"));
+		Point screenSize = new Point();
+		getWindowManager().getDefaultDisplay().getSize(screenSize);
+		int themeIconHeight = screenSize.x * 5 / 16 / 5;
+		ThemePicFactory.setHeight(themeIconHeight);
 		// boolean useHistory = shared.getBoolean("use_history", true);
 		// HistoryManager.setEnabled(useHistory);
 	}
@@ -347,7 +356,7 @@ public class MainActivity extends ListActivity implements OnEditorActionListener
 	 * 
 	 * @param modelsToAdd
 	 */
-	public void replaceModelsBy(final List<Map<String, Object>> modelsToAdd) {
+	public void replaceModelsBy(final List<KulerTheme> modelsToAdd) {
 		models.clear();
 		addAllThoseModels(modelsToAdd);
 	}

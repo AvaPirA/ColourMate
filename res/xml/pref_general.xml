@@ -22,7 +22,7 @@
         android:key="use_history"
         android:summaryOff="Do not save requests"
         android:summaryOn="Save few last requests"
-        android:title="@string/pref_title_autoupload" />
+        android:title="@string/pref_title_history" />
 
     <ListPreference 
         android:defaultValue="1"
@@ -34,7 +34,5 @@
         android:positiveButtonText="@null"
         android:summary="@string/pref_summary_history_size"
         android:title="@string/pref_title_history_size"
-        
         />
-
 </PreferenceScreen>

@@ -17,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.avapir.colourmate.BuildConfig;
 import com.avapir.colourmate.activities.MainActivity;
+import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.list.ThemePicFactory;
 import com.avapir.colourmate.networking.util.Parser;
 
@@ -72,7 +73,7 @@ public class HistoryManager {
 
 	/**
 	 * Load information of one of previously saved requests<br>
-	 * After gathering, method creates new List<Map<String, Object>> and stores
+	 * After gathering, method creates new List<KulerTheme> and stores
 	 * loaded information in it like in time when it was loaded from network and
 	 * parsed
 	 * 
@@ -81,10 +82,10 @@ public class HistoryManager {
 	 *            string, which defines that request
 	 * @return
 	 */
-	private static List<Map<String, Object>> createListFromDatabase(final Context context,
+	private static List<KulerTheme> createListFromDatabase(final Context context,
 			final String requestString) {
 		final SQLiteDatabase db = new HistoryDBSupport(context, null).getReadableDatabase();
-		final List<Map<String, Object>> outList = new ArrayList<Map<String, Object>>();
+		final List<KulerTheme> outList = new ArrayList<KulerTheme>();
 		final Cursor c = db.query(requestString, null, null, null, null, null, null);
 		if (c.moveToFirst()) {
 			do {
@@ -93,7 +94,7 @@ public class HistoryManager {
 						c.getColumnIndex(RATING), c.getColumnIndex(COLOR + 0),
 						c.getColumnIndex(COLOR + 1), c.getColumnIndex(COLOR + 2),
 						c.getColumnIndex(COLOR + 3), c.getColumnIndex(COLOR + 4) };
-				final Map<String, Object> map = new HashMap<String, Object>() {
+				final KulerTheme map = new KulerTheme() {
 					private static final long	serialVersionUID	= 7379284267295850850L;
 
 					{
@@ -141,7 +142,7 @@ public class HistoryManager {
 	 * @param i
 	 */
 	public static void inflateHistoryElement(final MainActivity listActivity, final int i) {
-		final List<Map<String, Object>> that = createListFromDatabase(listActivity, titles.get(i));
+		final List<KulerTheme> that = createListFromDatabase(listActivity, titles.get(i));
 		listActivity.replaceModelsBy(that);
 	}
 
@@ -152,8 +153,8 @@ public class HistoryManager {
 	 * @param database
 	 */
 	private static void saveListToDatabase(final String requestString,
-			final List<Map<String, Object>> result, final SQLiteDatabase database) {
-		for (final Map<String, Object> map : result) {
+			final List<KulerTheme> result, final SQLiteDatabase database) {
+		for (final KulerTheme map : result) {
 			final ContentValues cv = new ContentValues();
 			for (int i = 0; i < 5; i++) {
 				cv.put(ORDERED_TABLE_KEYS[i], (String) map.get(ORDERED_KEYS[i]));
@@ -183,8 +184,8 @@ public class HistoryManager {
 	 *            server's response
 	 */
 	public static void saveNew(final Context context, final String requestString,
-			final List<Map<String, Object>> result) {
-		if (!(isEnabled && BuildConfig.HISTORY_ENABLED)) {
+			final List<KulerTheme> result) {
+		if (!(isEnabled)) {
 			return;
 		}
 		final HistoryDBSupport hdbs = new HistoryDBSupport(context, requestString);

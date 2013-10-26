@@ -70,7 +70,7 @@ public class DataManager {
 	/**
 	 * List which stores models of downloaded items
 	 */
-	public static List<Map<String, Object>>	models	= new ArrayList<Map<String, Object>>();
+	public static List<KulerTheme>	models	= new ArrayList<KulerTheme>();
 
 	/**
 	 * String "by "

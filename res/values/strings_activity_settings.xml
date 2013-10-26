@@ -5,6 +5,7 @@
     <string name="pref_header_general">General</string>
     <string name="pref_title_autoupload">Autoupload on scroll</string>
     <string name="pref_title_themes_per_page">Themes per page</string>
+    <string name="pref_title_history">History usage</string>
     <string name="pref_title_history_size">History size</string>
     <string name="pref_summary_autoupload_ON">More themes will be loaded only when search-button will be pressed again for similar request in a row</string>
     <string name="pref_summary_autoupload_OFF">More themes will be loaded when the list was scrolled to the 3rd item from the end</string>
@@ -26,13 +27,13 @@
         <item>30</item>
     </string-array>
     <!-- About -->
-
+    
     <string name="pref_header_about">About application</string>
     <string name="cookies_by">Cookies by Adobe\u00A9 kuler\u00A9</string>
     <string name="title_author">Author</string>
     <string name="title_version">Version</string>
     <string name="summary_version">1.7.3</string>
-	<string name="db_name">HistoryDataBase</string>
+    <string name="db_name">HistoryDataBase</string>
     <string name="db_version">1</string>
     <string name="summary_author">Alpen Ditrix\nAvadend Piroserpen Arts Ltd. \u00A9 2012–2013</string>
 

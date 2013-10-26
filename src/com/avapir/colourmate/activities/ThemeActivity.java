@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.avapir.colourmate.R;
 import com.avapir.colourmate.data.DataManager;
+import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.networking.util.Parser;
 
 /**
@@ -32,7 +33,7 @@ import com.avapir.colourmate.networking.util.Parser;
 @SuppressWarnings("javadoc")
 public class ThemeActivity extends Activity implements OnClickListener {
 
-	private Map<String, Object>	model;
+	private KulerTheme	model;
 
 	private TextView			title;
 	private TextView			author;
@@ -127,11 +128,11 @@ public class ThemeActivity extends Activity implements OnClickListener {
 		// getBaseContext(),
 		// (int[]) model.get(SearchRequestTask._SWATCHES), -1, -1));
 		image.setImageDrawable((Drawable) model.get(Parser._BIG_PICTURE));
-		rating.setMax(5);
-		final String score = (String) model.get(Parser.__RATING);
-		final float f = Float.parseFloat(score);
-		rating.setRating(f);
-		rating.setEnabled(false);
+		// rating.setMax(5);
+		// final String score = (String) model.get(Parser.__RATING);
+		// final float f = Float.parseFloat(score);
+		// rating.setRating(f);
+		// rating.setEnabled(false);
 		// rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 		//
 		// @Override

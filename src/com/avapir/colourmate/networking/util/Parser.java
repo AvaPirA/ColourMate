@@ -1,9 +1,7 @@
 package com.avapir.colourmate.networking.util;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -12,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.avapir.colourmate.data.DataManager.DateParser;
+import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.list.ThemePicFactory;
 
 @SuppressWarnings("javadoc")
@@ -49,10 +48,10 @@ public class Parser {
 
 	public static final int					EMPTY_COLOR			= 0x00FFffFF;
 
-	private final List<Map<String, Object>>	returnList;
+	private final List<KulerTheme>	returnList;
 	private final Context					context;
 
-	public Parser(final Context c, final List<Map<String, Object>> list) {
+	public Parser(final Context c, final List<KulerTheme> list) {
 		context = c;
 		returnList = list;
 	}
@@ -115,7 +114,7 @@ public class Parser {
 	public void parseNodeList(final NodeList list) {
 		for (int i = 0; i < list.getLength(); i++) {
 			final Node tmpNode = list.item(i);
-			returnList.add(new HashMap<String, Object>() {
+			returnList.add(new KulerTheme() {
 				{
 					put(__ID, parseID(tmpNode));
 					put(__TITLE, parseName(tmpNode));
@@ -124,7 +123,6 @@ public class Parser {
 					final int[] s = parseSwatches(tmpNode);
 					put(__RATING, parseRating(tmpNode));
 					put(__SWATCHES, s);
-					put(_SMALL_PICTURE, ThemePicFactory.createNewPicFor(context, s));
 					put(_BIG_PICTURE, ThemePicFactory.createBigImage(context, s, -1, -1));
 				}
 			});

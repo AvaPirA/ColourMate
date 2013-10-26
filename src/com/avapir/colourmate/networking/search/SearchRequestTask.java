@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.avapir.colourmate.R;
 import com.avapir.colourmate.activities.MainActivity;
+import com.avapir.colourmate.data.KulerTheme;
 import com.avapir.colourmate.data.history.HistoryManager;
 import com.avapir.colourmate.networking.util.HttpGetter;
 import com.avapir.colourmate.networking.util.Parser;
@@ -37,7 +38,7 @@ import com.avapir.colourmate.networking.util.Parser;
  * @author Alpen Ditrix
  * 
  */
-public class SearchRequestTask extends AsyncTask<String, Void, List<Map<String, Object>>> {
+public class SearchRequestTask extends AsyncTask<String, Void, List<KulerTheme>> {
 
 	/**
 	 * Constant receiving which {@link #outOfTimeHandler} must {@link #cancel(boolean)}this task
@@ -69,7 +70,7 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<Map<String, 
 	/**
 	 * Model will be parsed from received XML-file and stored here
 	 */
-	private List<Map<String, Object>>	receivedModels;
+	private List<KulerTheme>	receivedModels;
 
 	/**
 	 * Link on activity, which executed this task and where will be put parsed
@@ -110,9 +111,9 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<Map<String, 
 								};
 
 	@Override
-	protected List<Map<String, Object>> doInBackground(final String... requestString) {
+	protected List<KulerTheme> doInBackground(final String... requestString) {
 		outOfTimeHandler.sendEmptyMessageDelayed(TIME_EXPIRED, 30 * 1000);
-		receivedModels = new ArrayList<Map<String, Object>>();
+		receivedModels = new ArrayList<KulerTheme>();
 		if (requestString.length > 0) {
 			// manual request
 			link = requester.makeRequest(requestString[0]);
@@ -154,7 +155,7 @@ public class SearchRequestTask extends AsyncTask<String, Void, List<Map<String, 
 	}
 
 	@Override
-	protected void onPostExecute(final List<Map<String, Object>> result) {
+	protected void onPostExecute(final List<KulerTheme> result) {
 		postExecuteStates();
 
 		// This block works here (NOT in the MainActivity class) because only

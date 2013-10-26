@@ -28,7 +28,9 @@ public class CustomPictureBinder implements ViewBinder {
 		switch (view.getId()) {
 		case R.id.image_theme_list_swatches:
 			((ImageView) view).setImageDrawable((Drawable) data);
-			// Log.i("Binder", "image set");
+			// ((ImageView)
+			// view).setImageDrawable(ThemePicFactory.createNewPicFor(view.getContext(),
+			// (int[]) data));
 			return true;
 		case R.id.text_theme_list_title:
 			String title = (String) data;
@@ -38,7 +40,6 @@ public class CustomPictureBinder implements ViewBinder {
 			((TextView) view).setText(title);
 			return true;
 		default:
-			// Log.i("Binder", "some shit will be set");
 			return false;
 		}
 	}

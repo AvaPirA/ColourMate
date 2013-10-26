@@ -5,9 +5,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import com.avapir.colourmate.data.KulerTheme;
+
 import android.os.AsyncTask;
 
-public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String, Object>>> {
+public class CommentsRequestTask extends AsyncTask<Void, Void, List<KulerTheme>> {
 
 	private final String	ID;
 
@@ -16,7 +18,7 @@ public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String, 
 	}
 
 	@Override
-	protected List<Map<String, Object>> doInBackground(final Void... params) {
+	protected List<KulerTheme> doInBackground(final Void... params) {
 
 		try {
 			new URL(new CommentsRequestConstructor().makeRequest(ID));
@@ -28,7 +30,7 @@ public class CommentsRequestTask extends AsyncTask<Void, Void, List<Map<String, 
 	}
 
 	@Override
-	protected void onPostExecute(final List<Map<String, Object>> result) {
+	protected void onPostExecute(final List<KulerTheme> result) {
 		super.onPostExecute(result);
 	}
 
